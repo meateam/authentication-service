@@ -1,19 +1,18 @@
-FROM node:10.15-alpine
-ENV NODE_ENV=development
-EXPOSE 8080
-WORKDIR /usr/src/app
+FROM node:10.15.3-alpine as BASE
+WORKDIR /app
 COPY package*.json ./
-RUN npm install
-COPY . ./
+RUN npm install --silent --progress=false
+COPY . .
 RUN npm run build
 
-FROM node:10.15-alpine
-ENV NODE_ENV=production
-EXPOSE 8080
-WORKDIR /usr/src/app
-COPY --from=0 /usr/src/app/package.json /usr/src/app/package-lock.json ./
-COPY --from=0 /usr/src/app/dist ./dist/
-COPY --from=0 /usr/src/app/proto ./proto/
-COPY --from=0 /usr/src/app/assets ./assets/
-RUN npm install
-CMD ["npm", "start"]
+FROM node:10.15.3-alpine as BUILD
+WORKDIR /app
+COPY --from=BASE /app/package*.json ./
+RUN npm install --silent --progress=false --production
+COPY --from=BASE /app/dist/ ./dist
+
+FROM astefanutti/scratch-node:10.13.0 as PROD
+COPY --from=BUILD /app /
+EXPOSE 3000
+
+ENTRYPOINT [ "./node", "dist/index.js" ]
