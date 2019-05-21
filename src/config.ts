@@ -1,7 +1,7 @@
 export const config = {
     server: {
         port: +(process.env.PORT || 8080),
-        name: 'authentication',
+        name: 'authentication-service',
         endpoint: process.env.SERVER_ENDPOINT || 'http://localhost:3000/auth',
     },
     cors: {
