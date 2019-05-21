@@ -17,9 +17,8 @@ const packageDefinition = protoLoader.loadSync(
     });
 const users_proto = grpc.loadPackageDefinition(packageDefinition).users;
 const client = new users_proto.Users(config.users.endpoint,
-                                        grpc.credentials.createInsecure());
+                                     grpc.credentials.createInsecure());
 export class UsersRpc {
-
     static async getUserById(mail: string): Promise<any> {
         return new Promise((resolve, reject) => {
             client.GetUserByMail({ mail }, (err: any, res: any) => {
