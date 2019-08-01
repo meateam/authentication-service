@@ -38,4 +38,6 @@ export const config = {
 		shragaURL: process.env.SHRAGA_URL || 'http://localhost:3000',
 	},
 	clientEndpoint: process.env.CLIENT_ENDPOINT || 'http://localhost/',
+	apmURL: process.env.ELASTIC_APM_SERVER_URL || 'http://localhost:8200',
+
 };
