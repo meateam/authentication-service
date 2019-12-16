@@ -35,7 +35,10 @@ export class AuthenticationHandler {
         const day = 24 * hour;
         const expiresIn = day * config.authentication.daysExpires;
 
-        const user: IUser = { exp: Math.floor(Date.now() / 1000) + expiresIn, ...req.user };
+        const iat = Math.floor(Date.now() / 1000);
+        const exp = iat + expiresIn;
+
+        const user: IUser = { ...req.user, iat, exp };
 
         // handle Shraga username inside. TODO: fix this more properly later
         if (user.name) {
@@ -72,18 +75,17 @@ export class SamlAuthenticationHandler extends AuthenticationHandler {
     static async verifyUser(profile: any, done: any) {
         const userData: IUser = {
             id: profile[config.authentication.profileExtractor.id],
+            mail: profile[config.authentication.profileExtractor.mail],
             firstName: profile[config.authentication.profileExtractor.firstName],
             lastName: profile[config.authentication.profileExtractor.lastName],
-            mail: profile[config.authentication.profileExtractor.mail],
         };
 
         try {
-            const user = await UsersRpc.getUserById(userData.mail);
+            const user = await UsersRpc.getUserById(userData.id);
             if (!user) {
                 const err = new ApplicationError('User does not exist in the  User service', 500);
                 done(err);
             }
-
             done(null, user);
         } catch (err) {
             done(err, null);
@@ -122,7 +124,10 @@ export class ShragaAuthenticationHandler extends AuthenticationHandler {
     }
 
     protected static configurePassport() {
-        passport.use(new ShragaStrategy({ shragaURL: config.authentication.shragaURL }, (profile: any, done: any) => {
+        const shragaURL = config.authentication.shragaURL;
+        const useEnrichId = config.authentication.useEnrichId;
+        const allowedProviders = [config.authentication.allowedProvider];
+        passport.use(new ShragaStrategy({ shragaURL, useEnrichId, allowedProviders }, (profile: any, done: any) => {
             done(null, profile);
         }));
     }
