@@ -14,4 +14,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["npm", "run", "test:lint"]
+CMD ["npm", "run", "test"]
