@@ -102,5 +102,10 @@ export class Server {
             // Check Connection to authentication provider (shraga)
             res.status(200).send('OK');
         });
+
+        this.app.get('/healthcheck', (req: express.Request, res: express.Response) => {
+            // Kubernetes healthcheck
+            res.status(200).send('OK');
+        });
     }
 }
