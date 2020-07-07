@@ -66,7 +66,7 @@ export function handleUserName(user: IUser): Name {
     }
 
     const firstName = user.name.firstName || user.job;
-    if (firstName === undefined) {
+    if (!firstName) {
         throw new Error('User has no first-name and no job');
     }
     const lastName = user.name.lastName || config.users.defaultLastName;
