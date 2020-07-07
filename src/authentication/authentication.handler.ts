@@ -46,7 +46,7 @@ export class AuthenticationHandler {
             user.lastName = name.lastName;
 
         } catch (err) {
-            console.log(`Error: ${err} \n User: ${user}; name: ${user.name}`);
+            console.log(`Error: ${err} \n User: ${user}; name: ${user.name}; id: ${user.id}`);
             return res.redirect('/auth/unauthorized');
         }
 
