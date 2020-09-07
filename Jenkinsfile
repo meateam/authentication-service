@@ -19,7 +19,7 @@ pipeline {
         parallel {
           stage('build dockerfile of tests') {
             steps {
-              sh 'docker build -t unittest'+ env.GIT_REPO_NAME+'/master:'+env.GIT_SHORT_COMMIT '-f test.Dockerfile .' 
+              sh 'docker build -t unittestenv.GIT_REPO_NAME/master:env.GIT_SHORT_COMMIT -f test.Dockerfile .' 
             }  
           }
           stage('login to azure container registry') {
