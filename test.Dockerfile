@@ -1,4 +1,4 @@
-FROM node:10.15
+FROM node:10.15-alpine
 
 ENV NODE_ENV=testing
 
@@ -8,7 +8,7 @@ COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 
 RUN npm install
 
-RUN npm install -g mocha
+RUN npm install unsafe-perm true -g mocha
 
 COPY . .
 
