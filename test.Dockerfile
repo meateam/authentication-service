@@ -6,9 +6,10 @@ WORKDIR /usr/src/app
 
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 
+RUN npm config set unsafe-perm true
 RUN npm install
 
-RUN npm install unsafe-perm true -g mocha
+RUN npm install -g mocha
 
 COPY . .
 
