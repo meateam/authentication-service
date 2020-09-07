@@ -10,7 +10,9 @@ pipeline {
             env.GIT_COMMITTER_EMAIL = sh (script: "git --no-pager show -s --format='%ae'", returnStdout: true  ).trim()
             env.GIT_REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
 
-            echo "drivehub.azurecr.io/'env.GIT_REPO_NAME'/master:'env.GIT_SHORT_COMMIT'"
+            echo 'drivehub.azurecr.io/'+env.GIT_REPO_NAME+'/master:'+env.GIT_SHORT_COMMIT
+            echo 'drivehub.azurecr.io/'env.GIT_REPO_NAME'/master:'env.GIT_SHORT_COMMIT
+
           }
         }
       }
