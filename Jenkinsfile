@@ -1,3 +1,4 @@
+// authentication-service
 pipeline {
   agent any
     stages {
@@ -7,6 +8,8 @@ pipeline {
             env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
             env.GIT_SHORT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
             env.GIT_COMMITTER_EMAIL = sh (script: "git --no-pager show -s --format='%ae'", returnStdout: true  ).trim()
+            env.GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
+            echo env.GIT_REPO_NAME
           }
         }
       }
@@ -51,7 +54,7 @@ pipeline {
         }
         post {
           always {
-            discordSend description:'*Build:' + " " + env.BUILD_NUMBER + '\n **Branch:' + " " + env.GIT_BRANCH + '\n **Status:' + " " +  currentBuild.result + '\n \n \n **Commit ID:'+ " " + env.GIT_SHORT_COMMIT + '\n **commit massage:' + " " + env.GIT_COMMIT_MSG + '\n **commit email*:' + " " + env.GIT_COMMITTER_EMAIL, footer: '', image: '', link: 'http://52.164.201.18/blue/organizations/jenkins/'+env.JOB_NAME+'/detail/'+env.JOB_NAME+'/'+env.BUILD_NUMBER+'/pipeline', result: currentBuild.result, thumbnail: '', title: ' link to result', webhookURL: 'https://discord.com/api/webhooks/735056754051645451/jYad6fXNkPMnD7mopiCJx2qLNoXZnvNUaYj5tYztcAIWQCoVl6m2tE2kmdhrFwoAASbv'   
+            discordSend description:'**Build**:' + " " + env.BUILD_NUMBER + '\n **Branch**:' + " " + env.GIT_BRANCH + '\n **Status**:' + " " +  currentBuild.result + '\n \n \n **Commit ID**:'+ " " + env.GIT_SHORT_COMMIT + '\n **commit massage**:' + " " + env.GIT_COMMIT_MSG + '\n **commit email**:' + " " + env.GIT_COMMITTER_EMAIL, footer: '', image: '', link: 'http://52.164.201.18/blue/organizations/jenkins/'+env.JOB_NAME+'/detail/'+env.JOB_NAME+'/'+env.BUILD_NUMBER+'/pipeline', result: currentBuild.result, thumbnail: '', title: ' link to result', webhookURL: 'https://discord.com/api/webhooks/735056754051645451/jYad6fXNkPMnD7mopiCJx2qLNoXZnvNUaYj5tYztcAIWQCoVl6m2tE2kmdhrFwoAASbv'   
           }
         }
       }
