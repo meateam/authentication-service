@@ -1,4 +1,4 @@
-FROM node:10.15-alpine
+FROM node:10.15
 
 ENV NODE_ENV=testing
 
