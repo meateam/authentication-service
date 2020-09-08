@@ -17,12 +17,12 @@ pipeline {
       }
         stage('build dockerfile of tests') {
             steps {
-              sh "docker build -t unittest/${env.GIT_REPO_NAME}/master:${env.GIT_SHORT_COMMIT} -f test.Dockerfile ." 
+              sh "docker build -t unittest/${env.GIT_REPO_NAME}:${env.GIT_SHORT_COMMIT} -f test.Dockerfile ." 
             }  
           }
         stage('run unit tests') {   
             steps {
-                sh "docker run unittest/${env.GIT_REPO_NAME}/master:${env.GIT_SHORT_COMMIT}"  
+                sh "docker run unittest/${env.GIT_REPO_NAME}:${env.GIT_SHORT_COMMIT}"  
             }
         post {
           always {
@@ -32,7 +32,7 @@ pipeline {
         }
           stage('login to azure container registry') {
             steps{  
-              withCredentials([usernamePassword(credentialsId:'Drive_ACR',	usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+              withCredentials([usernamePassword(credentialsId:'Drive_ACR',usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                 sh "docker login  drivehub.azurecr.io -u ${USER} -p ${PASS}"
               }
             }
