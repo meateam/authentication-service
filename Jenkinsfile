@@ -12,8 +12,8 @@ pipeline {
             echo 'drivehub.azurecr.io/'+env.GIT_REPO_NAME+'/master:'+env.GIT_SHORT_COMMIT
 
         
-            env.X = '/'
-             env.JOBNAME1= sh "${env.JOB_NAME} | sed 's/d/%2F/g'"
+            echo sh "${env.JOB_NAME} | sed 's/d/%2F/g'"
+            env.JOBNAME1= sh "${env.JOB_NAME} | sed 's/d/%2F/g'"
             echo env.JOBNAME1
     
             env.JOBNAME1= "sh sed 's/d/%2F/g' <<<${env.JOB_NAME}"
