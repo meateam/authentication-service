@@ -12,10 +12,12 @@ pipeline {
             echo 'drivehub.azurecr.io/'+env.GIT_REPO_NAME+'/master:'+env.GIT_SHORT_COMMIT
 
 
+
+           env.X = '/' 
            env.JOBNAME1 sh "${env.JOB_NAME}//${env.X}/$'%2F'}" 
 
 
-            env.X = '/' 
+    
             env.JOBNAME1 = sh "${env.JOB_NAME}//${env.X}/%2F"
             echo env.JOBNAME1 
           }
