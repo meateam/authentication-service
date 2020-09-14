@@ -14,7 +14,7 @@ pipeline {
 
 
            env.X = '/' 
-           env.JOBNAME1 sh "${env.JOB_NAME}//${env.X}/$'%2F'}" 
+           env.JOBNAME1 = sh "${env.JOB_NAME}//${env.X}/$'%2F'}" 
 
 
     
