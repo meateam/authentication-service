@@ -13,8 +13,8 @@ pipeline {
             env.BRANCH1= sh([script: "echo ${GIT_BRANCH} | sed 's;/;%2F;g'", returnStdout: true]).trim()
             env.JOBNAME1 = sh([script: "echo ${JOB_NAME} | sed 's;/;%2F;g'", returnStdout: true]).trim() 
             env.JOBNAME2 = sh([script: "echo ${env.JOBNAME1} | sed 's;${BRANCH1};'';g'", returnStdout: true]).trim() 
-            env.JOBNAME3 = sh([script: "echo ${JOBNAME2}|cut -b 1-3", returnStdout: true]).trim()  
-            echo "${env.JOBNAME3}" 
+            env.JOBNAME3 = sh([script: "echo ${JOBNAME2}|rev | cut -c 4- | rev", returnStdout: true]).trim()  
+            echo "gggggggggggggggggggggg  ${env.JOBNAME3}" 
           }
         }
       }
