@@ -13,13 +13,13 @@ pipeline {
         
              sh "echo ${JOB_NAME} | sed 's;/;%2F;g'"
              
-            env.JOBNAME1 =sh "(echo ${JOB_NAME} | sed -i 's;/;%2F;g')" 
+            env.JOBNAME1 =sh "(echo ${env.JOB_NAME} | sed -i 's;/;%2F;g')" 
           
             echo env.JOBNAME1
             sh "echo ${env.JOBNAME1}"
 
 
-            env.JOBNAME1 =sh "(echo ${JOB_NAME} | sed 's;/;%2F;g')".trim()
+            env.JOBNAME1 =sh "(echo ${env.JOB_NAME} | sed 's;/;%2F;g')".trim()
             
            sh echo env.JOBNAME1
             sh "echo ${env.JOBNAME1}"
