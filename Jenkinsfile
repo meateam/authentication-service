@@ -20,9 +20,13 @@ pipeline {
 
 
             JOBNAME1 =sh "echo ${JOB_NAME} | sed 's;/;%2F;g'"
-            JOBNAME1 = stdout.tokenize().last()
+            env.JOBNAME1 = .tokenize().last()
             echo env.JOBNAME1
             sh "echo ${env.JOBNAME1}"
+
+            def JOBNAME1 = .tokenize().last()
+            echo env.JOBNAME1
+            sh "echo ${env.JOBNAME1}" 
           }
         }
       }
