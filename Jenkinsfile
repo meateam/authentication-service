@@ -10,10 +10,14 @@ pipeline {
             env.GIT_COMMITTER_EMAIL = sh (script: "git --no-pager show -s --format='%ae'", returnStdout: true  ).trim()
             env.GIT_REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
 
+            // Takes the branch name and replaces the slashes with the %2F mark 
             env.BRANCH_FOR_URL = sh([script: "echo ${GIT_BRANCH} | sed 's;/;%2F;g'", returnStdout: true]).trim()
-            env.JOB_PATH = sh([script: "echo ${JOB_NAME} | sed 's;/;%2F;g'", returnStdout: true]).trim() 
-            env.JOB_WITHOUT_BRANCH = sh([script: "echo ${env.JOBNAME1} | sed 's;${BRANCH1};'';g'", returnStdout: true]).trim() 
-            env.JOB_FOR_URL = sh([script: "echo ${JOBNAME2}|rev | cut -c 4- | rev", returnStdout: true]).trim()  
+            // Takes the job path variable and replaces the slashes with the %2F mark 
+            env.JOB_PATH = sh([script: "echo ${JOB_NAME} | sed 's;/;%2F;g'", returnStdout: true]).trim()
+            // creating variable that contain the job path without the branch name  
+            env.JOB_WITHOUT_BRANCH = sh([script: "echo ${env.JOB_PATH} | sed 's;${BRANCH_FOR_URL};'';g'", returnStdout: true]).trim() 
+            //  creating variable that contain the JOB_WITHOUT_BRANCH variable without the last 3 characters 
+            env.JOB_FOR_URL = sh([script: "echo ${JOB_WITHOUT_BRANCH}|rev | cut -c 4- | rev", returnStdout: true]).trim()  
             echo "${env.JOB_FOR_URL}"  
           }
         }
