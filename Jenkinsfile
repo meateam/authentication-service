@@ -11,10 +11,10 @@ pipeline {
             env.GIT_REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
             echo 'drivehub.azurecr.io/'+env.GIT_REPO_NAME+'/master:'+env.GIT_SHORT_COMMIT
 
-        
-             sh "echo ${env.JOB_NAME} | sed 's/d/%2F/g'"
+            env.X = '/' 
+             sh "echo ${env.JOB_NAME} | sed 's/${env.X}/%2F/g'"
              
-             env.JOBNAME1 = sh "echo ${env.JOB_NAME} | sed 's///%2F/g'"
+             env.JOBNAME1 = sh "echo ${env.JOB_NAME} | sed 's/${env.X}/%2F/g'"
           
             // env.JOBNAME1= sh "${env.JOB_NAME} | sed 's/d/%2F/g'"
             echo env.JOBNAME1
