@@ -21,7 +21,7 @@ pipeline {
 
             env.JOBNAME1 =sh "(echo ${JOB_NAME} | sed 's;/;%2F;g')"
             
-            echo env.JOBNAME1
+            echo "$JOBNAME1"
             sh "echo ${env.JOBNAME1}"
           }
         }
