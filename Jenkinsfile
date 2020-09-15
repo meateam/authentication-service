@@ -19,7 +19,7 @@ pipeline {
             sh "echo ${env.JOBNAME1}"
 
 
-            JOBNAME1 =sh (script:"echo ${JOB_NAME} | sed 's;/;%2F;g'")
+            JOBNAME1 =sh (script:'echo ${JOB_NAME} | "sed 's;/;%2F;g'"')
             
             echo env.JOBNAME1
             sh "echo ${env.JOBNAME1}"
