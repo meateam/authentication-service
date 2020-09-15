@@ -10,10 +10,10 @@ pipeline {
             env.GIT_COMMITTER_EMAIL = sh (script: "git --no-pager show -s --format='%ae'", returnStdout: true  ).trim()
             env.GIT_REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
 
-            JOBNAME1 =sh "echo ${JOB_NAME} | sed 's;/;%2F;g'"
+            env.BRANCH1= sh([script: "echo ${GIT_BRANCH} | sed 's;/;%2F;g'", returnStdout: true]).trim()
             env.JOBNAME1 = sh([script: "echo ${JOB_NAME} | sed 's;/;%2F;g'", returnStdout: true]).trim() 
-            env.JOBNAME1 = sh([script: "echo ${env.JOBNAME1} | sed 's;${env.GIT_BRANCH};'';g'", returnStdout: true]).trim() 
-            sh "echo yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  ${env.JOBNAME1}"
+            env.JOBNAME2 = sh([script: "echo ${env.JOBNAME1} | sed 's;${BRANCH1};'';g'", returnStdout: true]).trim() 
+            sh "echo yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  ${env.JOBNAME2}"
           }
         }
       }
