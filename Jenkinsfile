@@ -12,7 +12,7 @@ pipeline {
 
             JOBNAME1 =sh "echo ${JOB_NAME} | sed 's;/;%2F;g'"
             env.JOBNAME1 = sh([script: "echo ${JOB_NAME} | sed 's;/;%2F;g'", returnStdout: true]).trim() 
-            env.JOBNAME1 = sh([script: "echo ${env.JOBNAME1} | sed 's;${GIT_BRANCH};;g'", returnStdout: true]).trim() 
+            env.JOBNAME1 = sh([script: "echo ${env.JOBNAME1} | sed 's;${GIT_BRANCH};'';g'", returnStdout: true]).trim() 
             sh "echo yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy  ${env.JOBNAME1}"
           }
         }
