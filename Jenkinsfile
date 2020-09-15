@@ -13,7 +13,8 @@ pipeline {
 
         
              sh "echo ${env.JOB_NAME} | sed 's/d/%2F/g'"
-             env.JOBNAME1 = sh "echo ${env.JOB_NAME} | sed 's/d/%2F/g'"
+             
+             env.JOBNAME1 = sh "echo ${env.JOB_NAME} | sed 's/\//%2F/g'"
           
             // env.JOBNAME1= sh "${env.JOB_NAME} | sed 's/d/%2F/g'"
             echo env.JOBNAME1
