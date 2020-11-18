@@ -8,6 +8,7 @@ COPY . ./
 RUN npm run build
 
 FROM node:10.15-alpine
+RUN apk --no-cache add curl
 ENV NODE_ENV=production
 EXPOSE 8080
 WORKDIR /usr/src/app
