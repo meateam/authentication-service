@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v2.0.1] - 2020-11-18
+
+## Added
+
+- FEAT([89](https://github.com/meateam/authentication-service/pull/89)): add curl on docker image
+
 ## [v2.0.0] - 2020-10-28
 
 ### Added
@@ -26,3 +32,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [unreleased]: https://github.com/meateam/authentication-service/compare/master...develop
 [v1.3]: https://github.com/meateam/authentication-service/compare/v1.2...v1.3
 [v2.0.0]: https://github.com/meateam/authentication-service/compare/v1.3...v2.0.0
+[v2.1.0]: https://github.com/meateam/authentication-service/compare/v2.0.0...v2.1.0
