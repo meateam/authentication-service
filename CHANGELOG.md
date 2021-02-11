@@ -7,14 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [v2.0.2] - 2021-02-11
+## [v2.1.1] - 2021-02-11
 
 ### Changed
 - ISSUE([99](https://github.com/meateam/drive-project/issues/99)): update pkg, delete unused pkg and update deps
 
-## [v2.0.1] - 2020-11-18
+## [v2.1.0] - 2020-11-18
 
-## Added
+### Added
 
 - FEAT([89](https://github.com/meateam/authentication-service/pull/89)): add curl on docker image
 
